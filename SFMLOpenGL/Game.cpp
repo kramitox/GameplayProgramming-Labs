@@ -19,7 +19,7 @@ void Game::run()
 
 	while (isRunning) {
 
-		cout << "Game running..." << endl;
+		//cout << "Game running..." << endl;
 
 		while (window.pollEvent(event))
 		{
@@ -37,7 +37,6 @@ void Game::run()
 void Game::initialize()
 {
 	isRunning = true;
-
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -225,19 +224,19 @@ void Game::update()
 		}
 	}
 
-	cout << "Update up" << endl;
+	//cout << "Update up" << endl;
 }
 
 void Game::draw()
 {
-	cout << "Draw up" << endl;
+	//cout << "Draw up" << endl;
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glScalef(1.0f, 1.0001f, 1.000001f); //Scales the object depending on the axis defined.
-	glTranslatef(0.0001f, 0.0f, 0.0f); //Moves the start location for drawing all points across to a new location using the origin as 0,0
+	glScalef(1.0f, 1.0000f, 1.000000f); //Scales the object depending on the axis defined.
+	glTranslatef(0.0000f, 0.0f, 0.0f); //Moves the start location for drawing all points across to a new location using the origin as 0,0
 	glRotatef(rotationAngle, 0.0f, 0.0f, 1.0f); //Spins the drawings around the axis defined by the float.
-	cout << "Drawing Primative " << current << endl;
+	//cout << "Drawing Primative " << current << endl;
 	glCallList(current);
 
 	window.display();
@@ -246,6 +245,6 @@ void Game::draw()
 
 void Game::unload()
 {
-	cout << "Cleaning up" << endl;
+	//cout << "Cleaning up" << endl;
 }
 
