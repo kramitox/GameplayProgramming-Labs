@@ -3,6 +3,7 @@
 using namespace std;
 namespace customVector
 {
+	//Keenan McEntee
 	class Vector3
 	{
 	private:
