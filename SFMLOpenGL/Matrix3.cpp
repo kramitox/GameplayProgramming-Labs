@@ -44,6 +44,45 @@ namespace customMatrix
 		A32 = _A32;
 		A33 = _A33;
 	}
+	Matrix Matrix::Equals(Matrix m)
+	{
+		return Matrix(A11 = m.A11,
+			A12 = m.A12,
+			A13 = m.A13,
+			A21 = m.A21,
+			A22 = m.A22,
+			A23 = m.A23,
+			A31 = m.A31,
+			A32 = m.A32,
+			A33 = m.A33);
+	}
+	Matrix Matrix::Equals(customVector::Vector3 Row1, customVector::Vector3 Row2, customVector::Vector3 Row3)
+	{
+		return Matrix(A11 = Row1.getX(),
+		A12 = Row1.getY(),
+		A13 = Row1.getZ(),
+		A21 = Row2.getX(),
+		A22 = Row2.getY(),
+		A23 = Row2.getZ(),
+		A31 = Row3.getX(),
+		A32 = Row3.getY(),
+		A33 = Row3.getZ());
+
+	}
+	Matrix Matrix::Equals(double _A11, double _A12, double _A13,
+		double _A21, double _A22, double _A23,
+		double _A31, double _A32, double _A33)
+	{
+		return Matrix(A11 = _A11,
+			A12 = _A12,
+			A13 = _A13,
+			A21 = _A21,
+			A22 = _A22,
+			A23 = _A23,
+			A31 = _A31,
+			A32 = _A32,
+			A33 = _A33);
+	}
 
 	const customVector::Vector3 Matrix::operator*(const customVector::Vector3& v) const
 	{// An overloaded operator * to return the  product of the matrix by a vector

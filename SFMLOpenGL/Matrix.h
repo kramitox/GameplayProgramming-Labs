@@ -12,9 +12,14 @@ namespace customMatrix
 		Matrix(double _A11, double _A12, double _A13,
 			double _A21, double _A22, double _A23,
 			double _A31, double _A32, double _A33);
+		Matrix Equals(Matrix m);
+		Matrix Equals(customVector::Vector3 Row1, customVector::Vector3 Row2, customVector::Vector3 Row3);
+		Matrix Equals(double _A11, double _A12, double _A13, double _A21, double _A22, double _A23, double _A31, double _A32, double _A33);
+
 		const customVector::Vector3 operator*(const customVector::Vector3& v) const;
 		const Matrix operator +(const Matrix& m)const;
 		const Matrix operator -(const Matrix& m)const;
+
 		Matrix operator -(Matrix& M1);
 		const Matrix operator *(const double& x)const;
 		const Matrix Transpose()const;
