@@ -3,9 +3,9 @@
 bool flip = false;
 int current = 1;
 
-Game::Game() : window(VideoMode(800, 600), "OpenGL"), primatives(10)
+Game::Game() : window(VideoMode(800, 600), "OpenGL"), PRIMITIVES(10)
 {
-	index = glGenLists(primatives);
+	index = glGenLists(PRIMITIVES);
 }
 
 Game::~Game() {}
@@ -54,32 +54,50 @@ void Game::initialize()
 	glMatrixMode(GL_MODELVIEW);
 
 	
-	glNewList(index, GL_COMPILE);
-	/*glBegin(GL_TRIANGLES);
-	{
-		
-		glColor3f(0.0f, 0.0f, 1.0f);
-		glVertex3f(0.0, 2.0, -5.0);
-		glVertex3f(-2.0, -2.0, -5.0);
-		glVertex3f(2.0, -2.0, -5.0);
-	}
-	glEnd();
-	glEndList();
 
-	glNewList(index + 1, GL_COMPILE);
+}
+
+void Game::update()
+{
+	keyboardHandling();
+	m1.Equals(m1 * m1.RotationZ(rotationAngle));
+	m2.Equals(m2 * m2.RotationZ(rotationAngle));
+	updateMatrix();
+		if (rotationAngle > 360.0f)
+		{
+			rotationAngle -= 360.0f;
+		}
+
+}
+
+void Game::draw()
+{
+	//cout << "Draw up" << endl;
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	//glScalef(1.0f, 1.0000f, 1.000000f); //Scales the object depending on the axis defined.
+	//glTranslatef(0.0000f, 0.0f, 0.0f); //Moves the start location for drawing all points across to a new location using the origin as 0,0
+	//glRotatef(rotationAngle, 0.0f, 0.0f, 1.0f); //Spins the drawings around the axis defined by the float.
+	
+	//cout << "Drawing Primative " << current << endl;
+	glCallList(current);
+
+	window.display();
+
+}
+
+void Game::unload()
+{
+	//cout << "Cleaning up" << endl;
+}
+void Game::updateMatrix()
+{
+	glNewList(index, GL_COMPILE);
 	glBegin(GL_TRIANGLES);
 	{
 		glColor3f(0.0f, 1.0f, 0.0f);
-		glVertex3f(0.2, 0.0, -2.0);
-		glVertex3f(-2.0, -2.0, -2.0);
-		glVertex3f(2.0, -2.0, -2.0);
-	}
-	glEnd();*/
-	//glEndList();
-	glBegin(GL_TRIANGLES);
-	{
-		glColor3f(0.0f, 1.0f, 0.0f);
-		glVertex3f(GLfloat(pt1.getX()), GLfloat(pt1.getY()), GLfloat(pt1 .getZ()));
+		glVertex3f(GLfloat(pt1.getX()), GLfloat(pt1.getY()), GLfloat(pt1.getZ()));
 		glColor3f(0.0f, 0.0f, 1.0f);
 		glVertex3f(GLfloat(pt2.getX()), GLfloat(pt2.getY()), GLfloat(pt2.getZ()));
 		glColor3f(1.0f, 0.0f, 0.0f);
@@ -222,63 +240,67 @@ void Game::initialize()
 	glEndList();
 
 }
-
-void Game::update()
+void Game::keyboardHandling()
 {
-	elapsed = clock.getElapsedTime();
-
-	if (elapsed.asSeconds() >= 1.0f)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		clock.restart();
-
-		if (!flip)
-		{
-			flip = true;
-			current++;
-			if (current > primatives)
-			{
-				current = 1;
-			}
-		}
-		else
-			flip = false;
+		pt1.setX(pt1.getX() + MOVE);
+		pt2.setX(pt2.getX() + MOVE);
+		pt3.setX(pt3.getX() + MOVE);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	{
+		pt1.setX(pt1.getX() - MOVE);
+		pt2.setX(pt2.getX() - MOVE);
+		pt3.setX(pt3.getX() - MOVE);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
+		pt1.setY(pt1.getY() - MOVE);
+		pt2.setY(pt2.getY() - MOVE);
+		pt3.setY(pt3.getY() - MOVE);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	{
+		pt1.setY(pt1.getY() + MOVE);
+		pt2.setY(pt2.getY() + MOVE);
+		pt3.setY(pt3.getY() + MOVE);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
+	{
+		current = 1;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
+	{
+		current = 2;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3))
+	{
+		current = 3;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4))
+	{
+		current = 4;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num5))
+	{
+		current = 5;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num6))
+	{
+		current = 6;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num7))
+	{
+		current = 7;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num8))
+	{
+		current = 8;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num9))
+	{
+		current = 9;
 	}
 
-	if (flip)
-	{
-		//rotationAngle += 0.005f;
-
-		if (rotationAngle > 360.0f)
-		{
-			rotationAngle -= 360.0f;
-		}
-	}
-
-	//cout << "Update up" << endl;
 }
-
-void Game::draw()
-{
-	//cout << "Draw up" << endl;
-
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	//glScalef(1.0f, 1.0000f, 1.000000f); //Scales the object depending on the axis defined.
-	//glTranslatef(0.0000f, 0.0f, 0.0f); //Moves the start location for drawing all points across to a new location using the origin as 0,0
-	//glRotatef(rotationAngle, 0.0f, 0.0f, 1.0f); //Spins the drawings around the axis defined by the float.
-	
-	
-	m1.Equals(m1.RotationZ(rotationAngle));
-	m2.Equals(m2.RotationZ(rotationAngle));
-	//cout << "Drawing Primative " << current << endl;
-	glCallList(current);
-
-	window.display();
-
-}
-
-void Game::unload()
-{
-	//cout << "Cleaning up" << endl;
-}
-

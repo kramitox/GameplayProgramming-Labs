@@ -211,7 +211,7 @@ namespace customMatrix
 
 	}
 
-	Matrix Matrix::Rotation(int _angle)
+	Matrix Matrix::Rotation(float _angle)
 	{
 		double radians = PI / 180 * _angle;
 		Matrix answer = Matrix();
@@ -229,7 +229,7 @@ namespace customMatrix
 	}
 
 
-	Matrix Matrix::Translate(int dx, int dy)
+	Matrix Matrix::Translate(float dx, float dy)
 	{
 		Matrix answer = Matrix();
 		answer.A11 = 1;
@@ -245,7 +245,7 @@ namespace customMatrix
 		return answer;
 	}
 
-	Matrix Matrix::Scale(int dx, int dy)
+	Matrix Matrix::Scale(float dx, float dy)
 	{
 		Matrix answer = Matrix();
 		answer.A11 = (double)dx / 100;
@@ -266,7 +266,7 @@ namespace customMatrix
 		return M1 * -1;
 	}
 
-	Matrix Matrix::RotationX(int _angle)
+	Matrix Matrix::RotationX(float _angle)
 	{
 		double radians = PI / 180 * _angle;
 		Matrix answer = Matrix();
@@ -282,7 +282,7 @@ namespace customMatrix
 
 		return answer;
 	}
-	Matrix Matrix::RotationY(int _angle)
+	Matrix Matrix::RotationY(float _angle)
 	{
 		double radians = PI / 180 * _angle;
 		Matrix answer = Matrix();
@@ -298,7 +298,7 @@ namespace customMatrix
 
 		return answer;
 	}
-	Matrix Matrix::RotationZ(int _angle)
+	Matrix Matrix::RotationZ(float _angle)
 	{
 		double radians = PI / 180 * _angle;
 		Matrix answer = Matrix::Matrix();
